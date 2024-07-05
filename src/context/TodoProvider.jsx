@@ -1,10 +1,11 @@
-import { createContext, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 import { todos as todoData } from "../data/todos";
 
 export const TodoContext = createContext();
 
 const TodoContextProvider = ({ children }) => {
   const [todos, setTodos] = useState(todoData);
+  const [filtro, setFiltro] = useState("all");
 
   const addTodo = (todo) => {
     const newTodo = {
@@ -37,19 +38,31 @@ const TodoContextProvider = ({ children }) => {
     setTodos(todos.filter((todo) => !todo.completed));
   };
 
+  const changeFilter = (value) => {
+    setFiltro(value);
+  };
+
+  const filterTodos = (filtro) => {
+    if (filtro === "all") return todos;
+    if (filtro === "completed") return todos.filter((todo) => todo.completed);
+    if (filtro === "active") return todos.filter((todo) => !todo.completed);
+  };
+
   const isEmptyTodos = todos.length === 0;
-  const totalTodos = todos.length;
+  const totalTodos = useMemo(() => filterTodos(filtro).length, [filtro, todos]);
 
   return (
     <TodoContext.Provider
       value={{
-        todos,
+        todos: filterTodos(filtro),
         addTodo,
         removeTodo,
         toggleTodo,
         clearCompleted,
+        changeFilter,
         isEmptyTodos,
         totalTodos,
+        filtro,
       }}
     >
       {children}
