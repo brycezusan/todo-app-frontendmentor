@@ -8,5 +8,6 @@ Solucion al reto de todo by @frontendMentor
 - ✅ Actualizar estado de todo especifico
 - ✅ Eliminar Todos completados
 - ✅ Filtrar todos por estado:all , completed , actives
+- ✅ Dark Mode , Ligth Mode
 
 
