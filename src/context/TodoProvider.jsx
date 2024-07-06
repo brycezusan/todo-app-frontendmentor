@@ -1,11 +1,23 @@
-import { createContext, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import { todos as todoData } from "../data/todos";
 
 export const TodoContext = createContext();
 
 const TodoContextProvider = ({ children }) => {
-  const [todos, setTodos] = useState(todoData);
+
+  const initialState = ()=>{
+    const todoStorage  = localStorage.getItem("todos")
+    return todoStorage ? JSON.parse(todoStorage) : todoData
+  }
+
+  const [todos, setTodos] = useState(initialState());
   const [filtro, setFiltro] = useState("all");
+
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos))
+  }, [todos])
+  
 
   const addTodo = (todo) => {
     const newTodo = {
