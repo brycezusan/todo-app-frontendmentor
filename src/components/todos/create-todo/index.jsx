@@ -18,7 +18,7 @@ export const CreateTodo = () => {
         <input
           type="text"
           placeholder="Create new todo..."
-          className="w-full border py-3 placeholder:text-gray-400 text-slate-800 font-semibold rounded-md px-5 pl-16 outline-none"
+          className="w-full border dark:border-none  py-3 placeholder:text-gray-400 text-slate-800 dark:text-gray-200 dark:bg-slate-800 font-semibold rounded-md px-5 pl-16 outline-none transicion"
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />

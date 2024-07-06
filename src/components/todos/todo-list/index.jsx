@@ -7,7 +7,7 @@ export const TodoList = () => {
 
   const NoTodos = () => {
     return (
-      <section className="bg-white py-4 rounded shadow">
+      <section className="bg-white dark:bg-slate-800 transicion py-4 rounded shadow">
         <h2 className="text-center font-bold text-slate-400 ">No hay tareas</h2>
       </section>
     );
@@ -16,7 +16,7 @@ export const TodoList = () => {
   if (isEmptyTodos) return <NoTodos />;
 
   return (
-    <section className="bg-white  rounded-md shadow">
+    <section className="bg-white dark:bg-slate-800 transicion rounded-md shadow">
       {/* Todos Item */}
       {todos.map((todo) => (
         <TodoItem
