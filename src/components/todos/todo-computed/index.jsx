@@ -1,7 +1,9 @@
 import { useTodo } from "../../../hooks/usetodo";
 
 export const TodoComputed = () => {
-  const {totalTodos ,clearCompleted } = useTodo();
+  const {todos ,clearCompleted } = useTodo();
+
+  const totalTodos = todos?.length;
 
   return (
     <div className="py-4 px-5 md:px-8 flex justify-between text-slate-400 font-medium">

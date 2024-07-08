@@ -1,9 +1,15 @@
 import { IoMdClose } from "react-icons/io";
 import { FaCheck } from "react-icons/fa6";
-export const TodoItem = ({ id, title, completed, removeTodo, toggleTodo }) => {
+import { forwardRef } from "react";
+
+// eslint-disable-next-line react/display-name
+export const TodoItem = forwardRef(({ id, title, completed, removeTodo, toggleTodo , ...props } ,ref) => {
   return (
     <>
-      <div className="flex justify-between items-center border-b gap-5 border-gray-100 py-4 px-5  transition-all">
+      <div 
+        {...props}
+        ref={ref}
+        className="flex justify-between items-center border-b gap-5 border-gray-100 py-4 px-5  transition-all">
         <div
           className={`${
             completed && "bg-blue-300 dark:bg-blue-500 border-transparent"
@@ -28,4 +34,4 @@ export const TodoItem = ({ id, title, completed, removeTodo, toggleTodo }) => {
       </div>
     </>
   );
-};
+})

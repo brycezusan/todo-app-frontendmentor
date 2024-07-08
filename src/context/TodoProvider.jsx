@@ -1,5 +1,5 @@
-import { createContext, useEffect, useMemo, useState } from "react";
-import { todos as todoData } from "../data/todos";
+import { createContext, useEffect, useState } from "react";
+// import { todos as todoData } from "../data/todos";
 
 export const TodoContext = createContext();
 
@@ -7,7 +7,7 @@ const TodoContextProvider = ({ children }) => {
 
   const initialState = ()=>{
     const todoStorage  = localStorage.getItem("todos")
-    return todoStorage ? JSON.parse(todoStorage) : todoData
+    return todoStorage ? JSON.parse(todoStorage) : []
   }
 
   const [todos, setTodos] = useState(initialState());
@@ -60,8 +60,6 @@ const TodoContextProvider = ({ children }) => {
     if (filtro === "active") return todos.filter((todo) => !todo.completed);
   };
 
-  const isEmptyTodos = todos.length === 0;
-  const totalTodos = useMemo(() => filterTodos(filtro).length, [filtro, todos]);
 
   return (
     <TodoContext.Provider
@@ -72,9 +70,8 @@ const TodoContextProvider = ({ children }) => {
         toggleTodo,
         clearCompleted,
         changeFilter,
-        isEmptyTodos,
-        totalTodos,
         filtro,
+        setTodos
       }}
     >
       {children}
